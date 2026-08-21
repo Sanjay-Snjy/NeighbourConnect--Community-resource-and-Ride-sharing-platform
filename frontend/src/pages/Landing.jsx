@@ -134,11 +134,14 @@ export default function Landing() {
 
       <main>
         {/* ===== Hero ===== */}
-        <section className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.5]" />
+        <section
+  className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: "url('/assets/bg.png')" }}
+>
+          <div className="pointer-events-none absolute inset-0  opacity-[0.5]" />
           <div className="pointer-events-none absolute -top-24 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-          <div className="container-page relative pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-24">
-            <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className=" w-full  text-center pt-28 pb-16 sm:pt-32 sm:px-10 lg:pt-40 lg:pb-40">
+            <div className=" ml-[00px] grid gap-12 lg:grid-cols-1">
               <div>
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
@@ -154,19 +157,19 @@ export default function Landing() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+                  className="mt-8 text-3xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-5xl"
                 >
-                  Your neighborhood,{" "}
-                  <span className="text-primary">finally connected</span>.
+                Where your neighborhood,{" "}  <br></br>
+                  <span className="text-primary">comes together</span>.
                 </motion.h1>
 
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-5 max-w-xl text-lg text-muted-foreground"
+                  className="mt-6  text-lg text-white/50"
                 >
-                  Share resources, coordinate rides, plan events, and stay in the loop — all in one
+                  Share resources, coordinate rides, plan events, and stay in the loop — all in one<br></br>
                   calm, private place built for the people right next door.
                 </motion.p>
 
@@ -174,15 +177,15 @@ export default function Landing() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, delay: 0.19, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-8 flex flex-col gap-3 sm:flex-row"
+                  className="mt-12 flex justify-center flex-col gap-4 sm:flex-row"
                 >
-                  <Button size="lg" asChild>
+                  <Button size="lg" asChild className="rounded-[40px] text-white/90 border border-white/50">
                     <Link to="/register">
-                      Get started free
+                      Get started 
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button size="lg" variant="outline" asChild>
+                  <Button size="lg" variant="outline" asChild className="rounded-[40px]">
                     <a href="#how">See how it works</a>
                   </Button>
                 </motion.div>
@@ -191,15 +194,15 @@ export default function Landing() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.28 }}
-                  className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground"
+                  className="mt-8  flex flex-wrap justify-center gap-x-10 gap-y-2 text-sm text-white"
                 >
-                  <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-[20px] backdrop-blur-lg px-4 py-2">
                     <Check className="h-4 w-4 text-success" /> Free to join
                   </span>
-                  <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-[20px] backdrop-blur-lg px-4 py-2">
                     <Check className="h-4 w-4 text-success" /> No ads, no noise
                   </span>
-                  <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-[20px] backdrop-blur-lg px-4 py-2">
                     <Check className="h-4 w-4 text-success" /> Private by default
                   </span>
                 </motion.div>
@@ -210,7 +213,7 @@ export default function Landing() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               >
-                <HeroMockup />
+               
               </motion.div>
             </div>
           </div>
@@ -307,46 +310,10 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* ===== Spotlight: Resources ===== */}
-        <section className="scroll-mt-20">
-          <div className="container-page py-20 lg:py-28">
-            <div className="grid items-center gap-12 lg:grid-cols-2">
-              <Reveal>
-                <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-                  Share more, buy less
-                </p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                  The tools you need are already next door
-                </h2>
-                <p className="mt-4 text-lg text-muted-foreground">
-                  Why own a hedge trimmer you use twice a year? List what you're happy to lend, find
-                  what you need, and request it in a tap. Every exchange builds a little more trust.
-                </p>
-                <ul className="mt-6 space-y-3">
-                  {[
-                    "Browse by category with clear availability",
-                    "Request, approve, and hand off with confidence",
-                    "Keep a friendly history of who helped whom",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-foreground">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600">
-                        <Check className="h-3 w-3" />
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-
-              <Reveal delay={0.1}>
-                <SpotlightResources />
-              </Reveal>
-            </div>
-          </div>
-        </section>
+       
 
         {/* ===== Spotlight: Events (reversed) ===== */}
-        <section id="community" className="scroll-mt-20 bg-card">
+        <section id="community" className="scroll-mt-20 ">
           <div className="container-page border-y border-border py-20 lg:py-28">
             <div className="grid items-center gap-12 lg:grid-cols-2">
               <Reveal className="order-2 lg:order-1" delay={0.1}>
@@ -402,42 +369,7 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* ===== CTA band ===== */}
-        <section>
-          <div className="container-page py-20 lg:py-28">
-            <Reveal className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 text-center shadow-elevated sm:px-16">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
-              <div className="pointer-events-none absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
-              <div className="relative">
-                <div className="mx-auto inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-sm font-medium text-white">
-                  <ShieldCheck className="h-4 w-4" />
-                  Free forever for neighbors
-                </div>
-                <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  Ready to meet the people next door?
-                </h2>
-                <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">
-                  Join your neighborhood today and discover how good it feels to be connected.
-                </p>
-                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                  <Button size="lg" variant="secondary" asChild>
-                    <Link to="/register">
-                      Create your account
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button
-                    size="lg"
-                    asChild
-                    className="border border-white/30 bg-transparent text-white hover:bg-white/10"
-                  >
-                    <Link to="/login">I already have an account</Link>
-                  </Button>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+       
       </main>
 
       <LandingFooter />

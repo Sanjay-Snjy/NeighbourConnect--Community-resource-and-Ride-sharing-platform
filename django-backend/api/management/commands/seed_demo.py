@@ -34,6 +34,7 @@ from api.models import (
     Resource,
     ResourceRequest,
     RideRequest,
+    Post,
 )
 
 User = get_user_model()

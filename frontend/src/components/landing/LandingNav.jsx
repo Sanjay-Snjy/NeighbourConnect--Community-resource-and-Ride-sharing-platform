@@ -29,12 +29,12 @@ export function LandingNav() {
 
   return (
     <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-colors duration-200",
-        scrolled
-          ? "border-b border-border bg-background/85 backdrop-blur-md"
-          : "border-b border-transparent",
-      )}
+     className={cn(
+  "fixed inset-x-0 top-0 z-40 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
+  scrolled
+    ? "mx-4 mt-2 rounded-[40px] border border-white/10 bg-white/5 backdrop-blur-md shadow-sm"
+    : "border-b border-transparent",
+)}
     >
       <div className="container-page flex h-16 items-center justify-between">
         <Logo to="/" />
@@ -53,15 +53,15 @@ export function LandingNav() {
 
         <div className="hidden items-center gap-2 md:flex">
           {isAuthenticated ? (
-            <Button asChild>
+            <Button asChild className="rounded-[40px]">
               <Link to="/app">Open app</Link>
             </Button>
           ) : (
             <>
-              <Button variant="ghost" asChild>
+              <Button variant="ghost" asChild className="rounded-[40px]">
                 <Link to="/login">Sign in</Link>
               </Button>
-              <Button asChild>
+              <Button asChild className="rounded-[40px]">
                 <Link to="/register">Get started</Link>
               </Button>
             </>
