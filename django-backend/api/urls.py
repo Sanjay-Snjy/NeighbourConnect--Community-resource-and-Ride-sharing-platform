@@ -31,5 +31,6 @@ urlpatterns = [
     path("auth/", include(auth_patterns)),
     path("search/", views.SearchView.as_view(), name="search"),
     path("stats/dashboard/", views.dashboard_stats, name="dashboard-stats"),
+    path("stats/community/", views.community_stats, name="community-stats"),
     path("", include(router.urls)),
 ]

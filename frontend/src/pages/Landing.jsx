@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -13,14 +14,15 @@ import {
   Package,
   ShieldCheck,
   Sparkles,
-  Star,
   Users,
 } from "lucide-react";
 import { LandingNav } from "@/components/landing/LandingNav";
 import { LandingFooter } from "@/components/landing/LandingFooter";
 import { Reveal } from "@/components/common/Reveal";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { statsService } from "@/services/stats.service";
 import { HeroMockup } from "@/components/landing/HeroMockup";
 import { FaqItem } from "@/components/landing/FaqItem";
 
@@ -75,32 +77,13 @@ const STEPS = [
   },
 ];
 
-const STATS = [
-  { value: "18k+", label: "Neighbors connected" },
-  { value: "4,200", label: "Resources shared" },
-  { value: "1,900", label: "Rides coordinated" },
-  { value: "96%", label: "Would recommend" },
-];
-
-const TESTIMONIALS = [
-  {
-    quote:
-      "I borrowed a pressure washer from three doors down instead of buying one. NeighbourHub paid for itself the first week.",
-    name: "Priya Menon",
-    role: "Maple Grove",
-  },
-  {
-    quote:
-      "We organized a street cleanup for 40 people entirely through the events tab. RSVPs, reminders, everything just worked.",
-    name: "Daniel Okafor",
-    role: "Riverside",
-  },
-  {
-    quote:
-      "The carpool matching saved my school-run mornings. I've met neighbors I'd waved at for years but never actually knew.",
-    name: "Sofia Bianchi",
-    role: "Oak Hill",
-  },
+// Labels for the live community stats. Values are fetched from the public
+// /stats/community/ endpoint — never hard-coded.
+const STAT_METERS = [
+  { key: "neighbors", label: "Neighbors connected" },
+  { key: "resources_shared", label: "Resources shared" },
+  { key: "rides_coordinated", label: "Rides coordinated" },
+  { key: "events_hosted", label: "Events hosted" },
 ];
 
 const FAQS = [
@@ -128,6 +111,22 @@ const FAQS = [
 
 export default function Landing() {
   useDocumentTitle("Your neighborhood. Connected.");
+
+  const [stats, setStats] = useState(null);
+  const [statsLoading, setStatsLoading] = useState(true);
+  const [statsError, setStatsError] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    statsService
+      .community()
+      .then((data) => active && setStats(data))
+      .catch(() => active && setStatsError(true))
+      .finally(() => active && setStatsLoading(false));
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -217,22 +216,30 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* ===== Trust strip ===== */}
-        <section className="border-y border-border bg-card">
-          <div className="container-page py-8">
-            <p className="text-center text-sm font-medium text-muted-foreground">
-              Bringing neighbors together across thousands of communities
-            </p>
-            <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-4">
-              {STATS.map((s) => (
-                <div key={s.label} className="text-center">
-                  <p className="text-2xl font-bold text-foreground sm:text-3xl">{s.value}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
-                </div>
-              ))}
+        {/* ===== Trust strip (live community stats) ===== */}
+        {!statsError && (
+          <section className="border-y border-border bg-card">
+            <div className="container-page py-8">
+              <p className="text-center text-sm font-medium text-muted-foreground">
+                The NeighbourHub community, by the numbers
+              </p>
+              <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-4">
+                {STAT_METERS.map((s) => (
+                  <div key={s.key} className="text-center">
+                    {statsLoading ? (
+                      <Skeleton className="mx-auto h-8 w-16 sm:h-9" />
+                    ) : (
+                      <p className="text-2xl font-bold text-foreground sm:text-3xl">
+                        {(stats?.[s.key] ?? 0).toLocaleString()}
+                      </p>
+                    )}
+                    <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* ===== Features ===== */}
         <section id="features" className="scroll-mt-20">
@@ -371,41 +378,6 @@ export default function Landing() {
                   ))}
                 </ul>
               </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ===== Testimonials ===== */}
-        <section className="scroll-mt-20">
-          <div className="container-page py-20 lg:py-28">
-            <Reveal className="mx-auto max-w-2xl text-center">
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-                Loved by neighbors
-              </p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Real communities, real connection
-              </h2>
-            </Reveal>
-
-            <div className="mt-14 grid gap-6 md:grid-cols-3">
-              {TESTIMONIALS.map((t, i) => (
-                <Reveal key={t.name} delay={i * 0.06}>
-                  <figure className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-subtle">
-                    <div className="flex gap-0.5 text-primary">
-                      {Array.from({ length: 5 }).map((_, s) => (
-                        <Star key={s} className="h-4 w-4 fill-current" />
-                      ))}
-                    </div>
-                    <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-foreground">
-                      “{t.quote}”
-                    </blockquote>
-                    <figcaption className="mt-5 border-t border-border pt-4">
-                      <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                      <p className="text-sm text-muted-foreground">{t.role}</p>
-                    </figcaption>
-                  </figure>
-                </Reveal>
-              ))}
             </div>
           </div>
         </section>

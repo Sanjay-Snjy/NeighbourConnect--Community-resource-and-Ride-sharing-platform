@@ -789,3 +789,22 @@ def dashboard_stats(request):
             ).data,
         }
     )
+
+
+@api_view(["GET"])
+@dec_perms([AllowAny])
+def community_stats(request):
+    """Public, community-wide totals for the marketing landing page.
+
+    Unauthenticated on purpose: these are aggregate counts (no personal data)
+    used as live social proof. Every value is a real database count — nothing
+    is hard-coded.
+    """
+    return Response(
+        {
+            "neighbors": User.objects.filter(is_active=True).count(),
+            "resources_shared": Resource.objects.count(),
+            "rides_coordinated": CarpoolRide.objects.count(),
+            "events_hosted": Event.objects.count(),
+        }
+    )
