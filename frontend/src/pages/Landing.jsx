@@ -1,0 +1,568 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Bell,
+  CalendarDays,
+  Car,
+  Check,
+  Heart,
+  MapPin,
+  Megaphone,
+  MessagesSquare,
+  Package,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Users,
+} from "lucide-react";
+import { LandingNav } from "@/components/landing/LandingNav";
+import { LandingFooter } from "@/components/landing/LandingFooter";
+import { Reveal } from "@/components/common/Reveal";
+import { Button } from "@/components/ui/button";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { HeroMockup } from "@/components/landing/HeroMockup";
+import { FaqItem } from "@/components/landing/FaqItem";
+
+const FEATURES = [
+  {
+    icon: MessagesSquare,
+    title: "Community feed",
+    body: "Share updates, photos, and polls. React and comment to keep the conversation going — no algorithms, just your neighbors.",
+  },
+  {
+    icon: Package,
+    title: "Resource sharing",
+    body: "Lend a ladder, borrow a drill, give away what you no longer need. A friendly marketplace built on trust, not transactions.",
+  },
+  {
+    icon: Car,
+    title: "Carpool & rides",
+    body: "Offer a seat or request a lift. Smart matching pairs riders with drivers heading the same way.",
+  },
+  {
+    icon: CalendarDays,
+    title: "Local events",
+    body: "Plan block parties, cleanups, and meetups. RSVP, track attendance, and never miss what's happening nearby.",
+  },
+  {
+    icon: Megaphone,
+    title: "Community notices",
+    body: "Post lost-and-found, safety alerts, and important announcements — pinned where everyone can see them.",
+  },
+  {
+    icon: Bell,
+    title: "Direct messaging",
+    body: "Private one-to-one conversations with real-time notifications, so coordinating is effortless.",
+  },
+];
+
+const STEPS = [
+  {
+    icon: MapPin,
+    title: "Join your neighborhood",
+    body: "Create an account and tell us where you live. You're instantly connected to the people around you.",
+  },
+  {
+    icon: Users,
+    title: "Meet your neighbors",
+    body: "Browse the feed, discover shared resources, and see who's organizing what — all in one calm place.",
+  },
+  {
+    icon: Heart,
+    title: "Build something together",
+    body: "Share, plan, and help each other out. Small acts add up to a stronger, kinder community.",
+  },
+];
+
+const STATS = [
+  { value: "18k+", label: "Neighbors connected" },
+  { value: "4,200", label: "Resources shared" },
+  { value: "1,900", label: "Rides coordinated" },
+  { value: "96%", label: "Would recommend" },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "I borrowed a pressure washer from three doors down instead of buying one. NeighbourHub paid for itself the first week.",
+    name: "Priya Menon",
+    role: "Maple Grove",
+  },
+  {
+    quote:
+      "We organized a street cleanup for 40 people entirely through the events tab. RSVPs, reminders, everything just worked.",
+    name: "Daniel Okafor",
+    role: "Riverside",
+  },
+  {
+    quote:
+      "The carpool matching saved my school-run mornings. I've met neighbors I'd waved at for years but never actually knew.",
+    name: "Sofia Bianchi",
+    role: "Oak Hill",
+  },
+];
+
+const FAQS = [
+  {
+    q: "Is NeighbourHub free to use?",
+    a: "Yes. Joining your neighborhood, posting to the feed, sharing resources, and coordinating rides and events are all free.",
+  },
+  {
+    q: "Who can see what I post?",
+    a: "Your posts, resources, and events are shared with members of your neighborhood community. Direct messages stay private between you and the recipient.",
+  },
+  {
+    q: "How does carpool matching work?",
+    a: "When you offer a ride, we surface it to neighbors requesting lifts along a similar route and time. You always approve who joins before anything is confirmed.",
+  },
+  {
+    q: "Can I control my notifications?",
+    a: "Absolutely. You decide what you're notified about, and there's no noisy algorithmic feed — you see what your neighbors actually share, in order.",
+  },
+  {
+    q: "Is my data safe?",
+    a: "Your account is protected with secure authentication, and you control your own content. You can edit or delete anything you've posted at any time.",
+  },
+];
+
+export default function Landing() {
+  useDocumentTitle("Your neighborhood. Connected.");
+
+  return (
+    <div className="min-h-screen bg-background">
+      <LandingNav />
+
+      <main>
+        {/* ===== Hero ===== */}
+        <section className="relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.5]" />
+          <div className="pointer-events-none absolute -top-24 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+          <div className="container-page relative pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-24">
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-sm font-medium text-muted-foreground shadow-subtle"
+                >
+                  <Sparkles className="h-4 w-4 text-primary" />
+                  The modern home for your neighborhood
+                </motion.div>
+
+                <motion.h1
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+                >
+                  Your neighborhood,{" "}
+                  <span className="text-primary">finally connected</span>.
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-5 max-w-xl text-lg text-muted-foreground"
+                >
+                  Share resources, coordinate rides, plan events, and stay in the loop — all in one
+                  calm, private place built for the people right next door.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.19, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-8 flex flex-col gap-3 sm:flex-row"
+                >
+                  <Button size="lg" asChild>
+                    <Link to="/register">
+                      Get started free
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <a href="#how">See how it works</a>
+                  </Button>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.28 }}
+                  className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground"
+                >
+                  <span className="inline-flex items-center gap-1.5">
+                    <Check className="h-4 w-4 text-success" /> Free to join
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Check className="h-4 w-4 text-success" /> No ads, no noise
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Check className="h-4 w-4 text-success" /> Private by default
+                  </span>
+                </motion.div>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <HeroMockup />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Trust strip ===== */}
+        <section className="border-y border-border bg-card">
+          <div className="container-page py-8">
+            <p className="text-center text-sm font-medium text-muted-foreground">
+              Bringing neighbors together across thousands of communities
+            </p>
+            <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-4">
+              {STATS.map((s) => (
+                <div key={s.label} className="text-center">
+                  <p className="text-2xl font-bold text-foreground sm:text-3xl">{s.value}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Features ===== */}
+        <section id="features" className="scroll-mt-20">
+          <div className="container-page py-20 lg:py-28">
+            <Reveal className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Everything in one place
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                One app for the whole neighborhood
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Six thoughtfully designed modules that replace a dozen group chats, spreadsheets,
+                and flyers on the noticeboard.
+              </p>
+            </Reveal>
+
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {FEATURES.map((f, i) => (
+                <Reveal key={f.title} delay={i * 0.05}>
+                  <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-subtle transition-shadow hover:shadow-card">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary-600 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                      <f.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-foreground">{f.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== How it works ===== */}
+        <section id="how" className="scroll-mt-20 bg-card">
+          <div className="container-page border-y border-border py-20 lg:py-28">
+            <Reveal className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                How it works
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Up and running in minutes
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                No complicated setup. Join, look around, and start helping out.
+              </p>
+            </Reveal>
+
+            <div className="relative mt-14 grid gap-10 md:grid-cols-3">
+              {STEPS.map((step, i) => (
+                <Reveal key={step.title} delay={i * 0.08} className="relative text-center">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-background text-primary shadow-subtle">
+                    <step.icon className="h-6 w-6" />
+                  </div>
+                  <div className="mx-auto mt-4 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                    {i + 1}
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-foreground">{step.title}</h3>
+                  <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
+                    {step.body}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Spotlight: Resources ===== */}
+        <section className="scroll-mt-20">
+          <div className="container-page py-20 lg:py-28">
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <Reveal>
+                <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                  Share more, buy less
+                </p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  The tools you need are already next door
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                  Why own a hedge trimmer you use twice a year? List what you're happy to lend, find
+                  what you need, and request it in a tap. Every exchange builds a little more trust.
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {[
+                    "Browse by category with clear availability",
+                    "Request, approve, and hand off with confidence",
+                    "Keep a friendly history of who helped whom",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-foreground">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600">
+                        <Check className="h-3 w-3" />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+
+              <Reveal delay={0.1}>
+                <SpotlightResources />
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Spotlight: Events (reversed) ===== */}
+        <section id="community" className="scroll-mt-20 bg-card">
+          <div className="container-page border-y border-border py-20 lg:py-28">
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <Reveal className="order-2 lg:order-1" delay={0.1}>
+                <SpotlightEvents />
+              </Reveal>
+              <Reveal className="order-1 lg:order-2">
+                <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                  Bring people together
+                </p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  Events that actually happen
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                  From block parties to book clubs, planning is effortless. Set a date, cap the
+                  guest list, and let neighbors RSVP. Reminders handle the rest.
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {[
+                    "Public or private events with capacity limits",
+                    "One-tap RSVP and live attendee counts",
+                    "Automatic reminders so no one forgets",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-foreground">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600">
+                        <Check className="h-3 w-3" />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Testimonials ===== */}
+        <section className="scroll-mt-20">
+          <div className="container-page py-20 lg:py-28">
+            <Reveal className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Loved by neighbors
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Real communities, real connection
+              </h2>
+            </Reveal>
+
+            <div className="mt-14 grid gap-6 md:grid-cols-3">
+              {TESTIMONIALS.map((t, i) => (
+                <Reveal key={t.name} delay={i * 0.06}>
+                  <figure className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-subtle">
+                    <div className="flex gap-0.5 text-primary">
+                      {Array.from({ length: 5 }).map((_, s) => (
+                        <Star key={s} className="h-4 w-4 fill-current" />
+                      ))}
+                    </div>
+                    <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-foreground">
+                      “{t.quote}”
+                    </blockquote>
+                    <figcaption className="mt-5 border-t border-border pt-4">
+                      <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                      <p className="text-sm text-muted-foreground">{t.role}</p>
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== FAQ ===== */}
+        <section id="faq" className="scroll-mt-20 bg-card">
+          <div className="container-page border-y border-border py-20 lg:py-28">
+            <Reveal className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Questions & answers
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Everything you might be wondering
+              </h2>
+            </Reveal>
+
+            <div className="mx-auto mt-12 max-w-3xl divide-y divide-border rounded-2xl border border-border bg-background">
+              {FAQS.map((faq) => (
+                <FaqItem key={faq.q} question={faq.q} answer={faq.a} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== CTA band ===== */}
+        <section>
+          <div className="container-page py-20 lg:py-28">
+            <Reveal className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 text-center shadow-elevated sm:px-16">
+              <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
+              <div className="pointer-events-none absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
+              <div className="relative">
+                <div className="mx-auto inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-sm font-medium text-white">
+                  <ShieldCheck className="h-4 w-4" />
+                  Free forever for neighbors
+                </div>
+                <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                  Ready to meet the people next door?
+                </h2>
+                <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">
+                  Join your neighborhood today and discover how good it feels to be connected.
+                </p>
+                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                  <Button size="lg" variant="secondary" asChild>
+                    <Link to="/register">
+                      Create your account
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    asChild
+                    className="border border-white/30 bg-transparent text-white hover:bg-white/10"
+                  >
+                    <Link to="/login">I already have an account</Link>
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
+
+      <LandingFooter />
+    </div>
+  );
+}
+
+/* ---- Inline spotlight visuals (self-contained, no images) ---- */
+
+function SpotlightResources() {
+  const items = [
+    { name: "Cordless drill", owner: "Marcus T.", tag: "Tools", available: true },
+    { name: "Folding tables (x4)", owner: "Aisha K.", tag: "Events", available: true },
+    { name: "Kids' bike, 20\"", owner: "Elena R.", tag: "Kids", available: false },
+  ];
+  return (
+    <div className="rounded-2xl border border-border bg-card p-4 shadow-card sm:p-6">
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Package className="h-5 w-5 text-primary" />
+          <span className="font-semibold text-foreground">Shared resources</span>
+        </div>
+        <span className="rounded-full bg-primary-50 px-2.5 py-0.5 text-xs font-medium text-primary-700">
+          Near you
+        </span>
+      </div>
+      <div className="space-y-2.5">
+        {items.map((it) => (
+          <div
+            key={it.name}
+            className="flex items-center gap-3 rounded-xl border border-border bg-background p-3"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
+              <Package className="h-5 w-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-medium text-foreground">{it.name}</p>
+              <p className="text-xs text-muted-foreground">
+                {it.tag} · {it.owner}
+              </p>
+            </div>
+            <span
+              className={
+                it.available
+                  ? "rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                  : "rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground"
+              }
+            >
+              {it.available ? "Available" : "On loan"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SpotlightEvents() {
+  return (
+    <div className="rounded-2xl border border-border bg-background p-4 shadow-card sm:p-6">
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <CalendarDays className="h-5 w-5 text-primary" />
+          <span className="font-semibold text-foreground">This weekend</span>
+        </div>
+      </div>
+      <div className="rounded-xl border border-border bg-card p-4">
+        <div className="flex items-start gap-3">
+          <div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <span className="text-[0.625rem] font-semibold uppercase leading-none">Sat</span>
+            <span className="text-lg font-bold leading-none">14</span>
+          </div>
+          <div className="min-w-0">
+            <p className="font-semibold text-foreground">Community garden cleanup</p>
+            <p className="mt-0.5 text-sm text-muted-foreground">10:00 AM · Elm Street Park</p>
+          </div>
+        </div>
+        <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+          <div className="flex -space-x-2">
+            {["A", "B", "C", "D"].map((l, i) => (
+              <div
+                key={l}
+                className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-card bg-primary-100 text-2xs font-semibold text-primary-700"
+                style={{ zIndex: 10 - i }}
+              >
+                {l}
+              </div>
+            ))}
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-card bg-muted text-2xs font-semibold text-muted-foreground">
+              +9
+            </div>
+          </div>
+          <span className="rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground">
+            Going
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}

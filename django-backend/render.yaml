@@ -1,0 +1,32 @@
+# Render blueprint for the NeighbourHub backend + managed PostgreSQL.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: neighbourhub-api
+    runtime: python
+    rootDir: django-backend
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application"
+    healthCheckPath: /api/schema/
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        sync: false          # e.g. neighbourhub-api.onrender.com
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false          # e.g. https://neighbourhub.vercel.app
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: neighbourhub-db
+          property: connectionString
+      - key: USE_S3
+        value: "False"       # flip to True and add AWS_* to serve media from S3
+
+databases:
+  - name: neighbourhub-db
+    databaseName: neighbourhub
+    plan: free
