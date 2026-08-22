@@ -1,9 +1,9 @@
 {
-  "name": "neighbourhub-frontend",
+  "name": "neighbourConnect-frontend",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "NeighbourHub — your neighborhood, connected. React 19 + Vite frontend.",
+  "description": "NeighbourConnect — your neighborhood, connected. React 19 + Vite frontend.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

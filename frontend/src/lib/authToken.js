@@ -2,7 +2,7 @@
  * Tiny persisted holder for the auth token, kept separate from the Zustand
  * store so the Axios layer can read/clear it without a circular import.
  */
-const STORAGE_KEY = "neighbourhub.token";
+const STORAGE_KEY = "neighbourconnect.token";
 
 let token = null;
 try {

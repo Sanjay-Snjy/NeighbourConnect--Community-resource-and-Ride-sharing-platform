@@ -145,7 +145,7 @@ export default function Settings() {
         <Card className="p-5 sm:p-6">
           <h2 className="text-base font-semibold text-foreground">Profile</h2>
           <p className="mt-0.5 text-sm text-muted-foreground">
-            This is how neighbors see you across NeighbourHub.
+            This is how neighbors see you across NeighbourConnect.
           </p>
 
           <div className="mt-5 flex items-center gap-4">
@@ -257,7 +257,7 @@ export default function Settings() {
       <Card className="mt-6 p-5 sm:p-6">
         <h2 className="text-base font-semibold text-foreground">Appearance</h2>
         <p className="mt-0.5 text-sm text-muted-foreground">
-          Choose how NeighbourHub looks on this device.
+          Choose how NeighbourConnect looks on this device.
         </p>
         <ThemeToggle />
       </Card>

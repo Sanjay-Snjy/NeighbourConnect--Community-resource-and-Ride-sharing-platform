@@ -97,7 +97,7 @@ export default function Login() {
       </form>
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        New to NeighbourHub?{" "}
+        New to NeighbourConnect?{" "}
         <Link to="/register" className="font-semibold text-primary hover:underline">
           Create an account
         </Link>

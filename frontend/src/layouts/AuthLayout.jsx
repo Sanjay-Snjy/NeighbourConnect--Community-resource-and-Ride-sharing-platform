@@ -51,7 +51,7 @@ export default function AuthLayout() {
               Everything your community needs, in one calm place.
             </h2>
             <p className="mt-4 text-white/80">
-              NeighbourHub brings the small acts that make a neighborhood feel like
+              NeighbourConnect brings the small acts that make a neighborhood feel like
               home — lending, sharing rides, showing up — into a single, friendly
               app.
             </p>

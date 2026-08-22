@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
-/** NeighbourHub logo mark — a stylized house/hub in the brand blue. */
+/** NeighbourConnect logo mark — a stylized house/hub in the brand blue. */
 export function LogoMark({ className }) {
   return (
      <span
@@ -12,7 +12,7 @@ export function LogoMark({ className }) {
     >
      <img
     src="/assets/logo.png"
-    alt="NeighbourHub"
+    alt="NeighbourConnect"
     className="h-full w-full object-contain"
   />
     </span>

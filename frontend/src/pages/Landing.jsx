@@ -88,7 +88,7 @@ const STAT_METERS = [
 
 const FAQS = [
   {
-    q: "Is NeighbourHub free to use?",
+    q: "Is NeighbourConnect free to use?",
     a: "Yes. Joining your neighborhood, posting to the feed, sharing resources, and coordinating rides and events are all free.",
   },
   {
@@ -224,7 +224,7 @@ export default function Landing() {
           <section className="border-y border-border bg-card">
             <div className="container-page py-8">
               <p className="text-center text-sm font-medium text-muted-foreground">
-                The NeighbourHub community, by the numbers
+                The NeighbourConnect community, by the numbers
               </p>
               <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-4">
                 {STAT_METERS.map((s) => (

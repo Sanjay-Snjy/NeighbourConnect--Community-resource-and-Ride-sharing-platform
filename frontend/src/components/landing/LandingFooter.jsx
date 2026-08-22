@@ -65,7 +65,7 @@ export function LandingFooter() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 sm:flex-row sm:items-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} NeighbourHub. Built for good neighbors.
+            © {new Date().getFullYear()} NeighbourConnect. Built for good neighbors.
           </p>
           <div className="flex items-center gap-3">
             <Link

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 export function useDocumentTitle(title) {
   useEffect(() => {
     const previous = document.title;
-    document.title = title ? `${title} · NeighbourHub` : "NeighbourHub";
+    document.title = title ? `${title} · NeighbourConnect` : "NeighbourConnect";
     return () => {
       document.title = previous;
     };
