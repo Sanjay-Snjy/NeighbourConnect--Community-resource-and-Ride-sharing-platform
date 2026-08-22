@@ -28,7 +28,7 @@ export function Logo({ className, showText = true, to = "/", size = "md" }) {
     <span className={cn("flex items-center gap-2.5", className)}>
       <LogoMark className={markSize} />
       {showText && (
-        <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
+        <span className="font-display text-lg font-extrabold tracking-tight text-slate-300 ">
           Neighbour<span className="text-primary">Connect</span>
         </span>
       )}

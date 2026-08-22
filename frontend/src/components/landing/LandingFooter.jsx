@@ -36,7 +36,7 @@ export function LandingFooter() {
     <footer className="border-t border-border ">
       <div className="container-page py-14">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          <div className="max-w-xs">
+          <div className="max-w-xs bg-black/20 p-4 rounded-3xl">
             <Logo to="/" />
             <p className="mt-4 text-sm text-muted-foreground">
               Your neighborhood. Connected. Share resources, coordinate rides, plan events, and

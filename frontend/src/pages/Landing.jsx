@@ -140,7 +140,7 @@ export default function Landing() {
 >
           <div className="pointer-events-none absolute inset-0  opacity-[0.5]" />
           <div className="pointer-events-none absolute -top-24 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-          <div className=" w-full  text-center pt-28 pb-16 sm:pt-32 sm:px-10 lg:pt-40 lg:pb-40">
+          <div className=" w-full  text-center pt-28 pb-16 sm:pt-32 sm:px-10 lg:pt-44 lg:pb-36">
             <div className=" ml-[00px] grid gap-12 lg:grid-cols-1">
               <div>
                 <motion.div
@@ -157,7 +157,7 @@ export default function Landing() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-8 text-3xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-5xl"
+                  className="mt-8 text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-5xl"
                 >
                 Where your neighborhood,{" "}  <br></br>
                   <span className="text-primary">comes together</span>.
@@ -197,13 +197,13 @@ export default function Landing() {
                   className="mt-8  flex flex-wrap justify-center gap-x-10 gap-y-2 text-sm text-white"
                 >
                   <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-[20px] backdrop-blur-lg px-4 py-2">
-                    <Check className="h-4 w-4 text-success" /> Free to join
+                    <Check className="h-4 w-4 text-success" /> Connect with neighbors
                   </span>
                   <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-[20px] backdrop-blur-lg px-4 py-2">
-                    <Check className="h-4 w-4 text-success" /> No ads, no noise
+                    <Check className="h-4 w-4 text-success" /> Discover what's nearby
                   </span>
                   <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-[20px] backdrop-blur-lg px-4 py-2">
-                    <Check className="h-4 w-4 text-success" /> Private by default
+                    <Check className="h-4 w-4 text-success" /> Stay in the loop
                   </span>
                 </motion.div>
               </div>

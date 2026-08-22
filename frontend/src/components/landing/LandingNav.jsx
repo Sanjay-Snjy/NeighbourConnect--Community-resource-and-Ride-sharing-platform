@@ -53,7 +53,7 @@ export function LandingNav() {
 
         <div className="hidden items-center gap-2 md:flex">
           {isAuthenticated ? (
-            <Button asChild className="rounded-[40px]">
+            <Button asChild className="rounded-[40px] text-white">
               <Link to="/app">Open app</Link>
             </Button>
           ) : (

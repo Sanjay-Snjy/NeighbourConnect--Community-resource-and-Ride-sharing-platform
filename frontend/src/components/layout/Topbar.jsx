@@ -43,7 +43,7 @@ export function Topbar() {
         <Menu className="h-5 w-5" />
       </button>
       <div className="lg:hidden">
-        <Logo to="/app" showText={false} />
+        <Logo to="/ "  showText={false} />
       </div>
 
       {/* Search */}
@@ -54,7 +54,7 @@ export function Topbar() {
         <Search className="h-4 w-4" />
         <span className="flex-1 text-left">Search neighborhood…</span>
         <kbd className="hidden rounded border border-border bg-muted px-1.5 py-0.5 text-2xs font-medium sm:inline-block">
-          ⌘K
+          Ctrl+K
         </kbd>
       </button>
 

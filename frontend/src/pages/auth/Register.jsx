@@ -64,7 +64,7 @@ export default function Register() {
           <Input
             id="full_name"
             autoComplete="name"
-            placeholder="Priya Nair"
+            placeholder="Sanjay S"
             aria-invalid={Boolean(errors.full_name)}
             {...register("full_name")}
           />
@@ -75,7 +75,7 @@ export default function Register() {
             <Input
               id="username"
               autoComplete="username"
-              placeholder="priya"
+              placeholder="Sanjay"
               aria-invalid={Boolean(errors.username)}
               {...register("username")}
             />
@@ -84,11 +84,11 @@ export default function Register() {
             label="Neighborhood"
             htmlFor="neighborhood"
             error={errors.neighborhood?.message}
-            hint="Optional"
+            hint=" "
           >
             <Input
               id="neighborhood"
-              placeholder="Maple Grove"
+              placeholder="RR Nagar"
               {...register("neighborhood")}
             />
           </FormField>

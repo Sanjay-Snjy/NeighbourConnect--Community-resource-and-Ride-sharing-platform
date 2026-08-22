@@ -103,12 +103,7 @@ export default function Login() {
         </Link>
       </p>
 
-      <div className="mt-6 rounded-lg border border-dashed border-border bg-muted/40 p-3 text-center text-xs text-muted-foreground">
-        <span className="font-medium text-foreground">Demo account</span> · username{" "}
-        <code className="rounded bg-card px-1 py-0.5 text-foreground">priya</code> ·
-        password{" "}
-        <code className="rounded bg-card px-1 py-0.5 text-foreground">demopass123</code>
-      </div>
+      
     </div>
   );
 }
