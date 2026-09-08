@@ -25,13 +25,15 @@ This repository is a monorepo with two independently deployable applications:
 
 ```
 NeighbourHub/
-├── django-backend/   # Django + REST API 
-└── frontend/         # React + Vite 
+├── backend/     # Django + REST API
+└── frontend/    # React + Vite SPA
 ```
+
+---
 
 ## Backend setup
 
-From `django-backend/`:
+From `backend/`:
 
 1. **Create and activate a virtual environment**
 
@@ -52,7 +54,6 @@ From `django-backend/`:
    cp .env.example .env
    ```
 
-
 4. **Apply migrations**
 
    ```bash
@@ -62,7 +63,7 @@ From `django-backend/`:
 5. **(Optional) Seed demo data**
 
    ```bash
-   python manage.py seed_demo          
+   python manage.py seed_demo
    ```
 
 6. **Create your own admin (optional)**
@@ -77,7 +78,7 @@ From `django-backend/`:
    python manage.py runserver          # http://localhost:8000
    ```
 
-The Django admin is available at `http://localhost:8000/admin/`.
+The Django admin is available at `http://localhost:8000/admin/`, the API docs at `http://localhost:8000/api/docs/`.
 
 ---
 
@@ -103,7 +104,6 @@ From `frontend/`:
    npm run dev                         # http://localhost:5173
    ```
 
-
 ## Running in development
 
 Run both servers side by side:
@@ -113,5 +113,45 @@ Run both servers side by side:
 | Backend API | `python manage.py runserver` | http://localhost:8000 |
 | Frontend SPA | `npm run dev` | http://localhost:5173 |
 
-###
+---
+
+## Deployment
+
+The project ships with configuration for **Render** (API) + **Vercel** (SPA), backed by managed PostgreSQL.
+
+### 1. Backend on Render
+
+`backend/render.yaml` is a Render Blueprint that provisions the web service and a free PostgreSQL database. Either use **Blueprint deploy** from the Render dashboard, or create the service manually with:
+
+- **Root directory:** `backend`
+- **Build command:** `./build.sh`
+- **Start command:** `gunicorn config.wsgi:application`
+
+Required environment variables:
+
+| Variable | Example | Notes |
+| --- | --- | --- |
+| `DJANGO_SECRET_KEY` | (generate) | Render can auto-generate this |
+| `DJANGO_DEBUG` | `False` | |
+| `DJANGO_ALLOWED_HOSTS` | `neighbourhub-api.onrender.com` | Your Render domain |
+| `CORS_ALLOWED_ORIGINS` | `https://your-frontend.vercel.app` | Your Vercel domain |
+| `CSRF_TRUSTED_ORIGINS` | `https://your-frontend.vercel.app` | Same as above |
+| `DATABASE_URL` | — | Injected automatically by the Blueprint |
+
+Health check: `GET /healthz/` returns `200 ok`. Migrations run automatically on every deploy via the `release` phase in `Procfile`.
+
+### 2. Frontend on Vercel
+
+Import the repository in Vercel and set **Root Directory** to `frontend` — `vercel.json` configures the build and SPA rewrites automatically. Then set:
+
+| Variable | Example |
+| --- | --- |
+| `VITE_API_BASE_URL` | `https://neighbourhub-api.onrender.com/api` |
+
+### 3. Media storage (optional)
+
+Uploads are stored on the server's local disk by default, which is fine for testing but **ephemeral on Render's free tier**. For persistent uploads set `USE_S3=True` plus `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_STORAGE_BUCKET_NAME` (and optionally `AWS_S3_CUSTOM_DOMAIN` for a CDN).
+
+---
+
 <p align="center"><em>NeighbourConnect</em></p>

@@ -4,10 +4,10 @@ services:
   - type: web
     name: neighbourhub-api
     runtime: python
-    rootDir: django-backend
+    rootDir: backend
     buildCommand: "./build.sh"
     startCommand: "gunicorn config.wsgi:application"
-    healthCheckPath: /api/schema/
+    healthCheckPath: /healthz/
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true

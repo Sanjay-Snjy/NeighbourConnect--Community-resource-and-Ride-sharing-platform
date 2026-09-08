@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.http import HttpResponse
 from django.urls import include, path
 from django.views.generic import RedirectView
 
@@ -12,8 +13,15 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
+
+def healthz(request):
+    """Lightweight liveness probe for load balancers / Render health checks."""
+    return HttpResponse("ok", content_type="text/plain")
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("healthz/", healthz, name="healthz"),
     # API
     path("api/", include("api.urls")),
     # OpenAPI schema & docs

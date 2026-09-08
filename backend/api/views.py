@@ -31,6 +31,7 @@ from .models import (
     Conversation,
     Event,
     EventBooking,
+    Like,
     Message,
     Notification,
     Post,
@@ -202,7 +203,9 @@ class PostViewSet(OwnedModelViewSet):
     def like(self, request, pk=None):
         post = self.get_object()
         liked = services.toggle_like(post, request.user)
-        return Response({"is_liked": liked, "like_count": post.like_count})
+        # Bypass the (stale) prefetch cache for an accurate count after mutating.
+        like_count = Like.objects.filter(post=post).count()
+        return Response({"is_liked": liked, "like_count": like_count})
 
     @extend_schema(
         methods=["GET"], responses=CommentSerializer(many=True)
@@ -534,14 +537,18 @@ class EventViewSet(OwnedModelViewSet):
         _, created = EventBooking.objects.get_or_create(event=event, user=request.user)
         if created:
             services.notify_event_join(event, request.user)
-        return Response({"is_attending": True, "attendee_count": event.attendee_count})
+        # Bypass the (stale) prefetch cache for an accurate count after mutating.
+        attendee_count = EventBooking.objects.filter(event=event).count()
+        return Response({"is_attending": True, "attendee_count": attendee_count})
 
     @extend_schema(request=None, responses={200: dict})
     @action(detail=True, methods=["post", "delete"])
     def leave(self, request, pk=None):
         event = self.get_object()
         EventBooking.objects.filter(event=event, user=request.user).delete()
-        return Response({"is_attending": False, "attendee_count": event.attendee_count})
+        # Bypass the (stale) prefetch cache for an accurate count after mutating.
+        attendee_count = EventBooking.objects.filter(event=event).count()
+        return Response({"is_attending": False, "attendee_count": attendee_count})
 
     @extend_schema(responses=UserSerializer(many=True))
     @action(detail=True, methods=["get"])

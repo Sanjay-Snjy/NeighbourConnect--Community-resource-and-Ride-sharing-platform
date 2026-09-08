@@ -117,6 +117,11 @@ export default function Landing() {
   const [statsError, setStatsError] = useState(false);
 
   useEffect(() => {
+    document.documentElement.classList.add("hide-scrollbar");
+    return () => document.documentElement.classList.remove("hide-scrollbar");
+  }, []);
+
+  useEffect(() => {
     let active = true;
     statsService
       .community()
@@ -129,7 +134,7 @@ export default function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="dark min-h-screen bg-background">
       <LandingNav />
 
       <main>
@@ -185,7 +190,7 @@ export default function Landing() {
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="rounded-[40px]">
+                  <Button size="lg" variant="outline" asChild className="rounded-[40px] text-white hover:bg-indigo-400 hover:border-white">
                     <a href="#how">See how it works</a>
                   </Button>
                 </motion.div>

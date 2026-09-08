@@ -68,11 +68,11 @@ export function Sidebar() {
         )}
       >
         {collapsed ? (
-          <NavLink to="/app" end aria-label="NeighbourHub home">
+          <NavLink to="/" end aria-label="NeighbourHub home">
             <LogoMark className="h-9 w-9" />
           </NavLink>
         ) : (
-          <Logo to="/app" />
+          <Logo to="/" />
         )}
       </div>
 
