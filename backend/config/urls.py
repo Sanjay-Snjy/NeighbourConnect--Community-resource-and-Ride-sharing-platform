@@ -16,6 +16,7 @@ from drf_spectacular.views import (
 
 def healthz(request):
     """Lightweight liveness probe for load balancers / Render health checks."""
+    # Keep lightweight, but optionally could use views.HealthCheckView here.
     return HttpResponse("ok", content_type="text/plain")
 
 

@@ -1,2 +1,6 @@
+# Web server for production (Render)
+# Web server for production (Render)
 web: gunicorn config.wsgi:application --log-file -
+
+# Database migrations on every release
 release: python manage.py migrate --noinput

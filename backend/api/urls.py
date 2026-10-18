@@ -27,8 +27,14 @@ auth_patterns = [
     path("me/", views.MeView.as_view(), name="auth-me"),
 ]
 
+# Health check for deployment monitoring
+health_patterns = [
+    path("healthz/", views.HealthCheckView.as_view(), name="health-check"),
+]
+
 urlpatterns = [
     path("auth/", include(auth_patterns)),
+    path("healthz/", include(health_patterns)),
     path("search/", views.SearchView.as_view(), name="search"),
     path("stats/dashboard/", views.dashboard_stats, name="dashboard-stats"),
     path("stats/community/", views.community_stats, name="community-stats"),
