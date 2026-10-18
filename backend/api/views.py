@@ -139,10 +139,10 @@ class MeView(APIView):
 # ─────────────────────────────────────────────────────────────────────────────
 @extend_schema(tags=["System"], operation_id="health_check", responses={200: {"type": "object", "properties": {"status": {"type": "string"}, "timestamp": {"type": "string"}}}}
 )
-@api_view(["GET"])
-@permission_classes([AllowAny])
 class HealthCheckView(APIView):
     """Health check endpoint for deployment monitoring."""
+
+    permission_classes = [AllowAny]
 
     def get(self, request):
         from django.utils import timezone
